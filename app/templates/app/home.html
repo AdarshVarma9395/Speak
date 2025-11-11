@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Say My Name</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;     /* Center horizontally */
+            align-items: center;         /* Center vertically */
+            flex-direction: column;      /* Stack elements vertically */
+            background-color: #f7f9fc;   /* Light background */
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 250px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        audio {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Enter your name</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Your Name" required>
+        <button type="submit">Speak</button>
+    </form>
+
+    {% if audio_file %}
+        <h3>Click to play:</h3>
+        <audio controls autoplay>
+            <source src="{{ audio_file }}" type="audio/mpeg">
+        </audio>
+    {% endif %}
+</body>
+</html>
+
